@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useAppStore } from '@/store/modules/app';
-import { useThemeStore } from '@/store/modules/theme';
-import { $t } from '@/locales';
+import {useAppStore} from '@/store/modules/app';
+import {useThemeStore} from '@/store/modules/theme';
+import {$t} from '@/locales';
 import LayoutModeCard from '../components/layout-mode-card.vue';
 
 defineOptions({
@@ -37,6 +37,13 @@ const themeStore = useThemeStore();
       </div>
     </template>
     <template #horizontal-mix>
+      <div class="layout-header"></div>
+      <div class="horizontal-wrapper">
+        <div class="layout-sider w-18px"></div>
+        <div class="layout-main"></div>
+      </div>
+    </template>
+    <template #horizontal-mix-reverse>
       <div class="layout-header"></div>
       <div class="horizontal-wrapper">
         <div class="layout-sider w-18px"></div>

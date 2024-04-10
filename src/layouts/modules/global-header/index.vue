@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useFullscreen } from '@vueuse/core';
-import { useAppStore } from '@/store/modules/app';
-import { useThemeStore } from '@/store/modules/theme';
-import { useRouteStore } from '@/store/modules/route';
+import {computed} from 'vue';
+import {useFullscreen} from '@vueuse/core';
+import {useAppStore} from '@/store/modules/app';
+import {useThemeStore} from '@/store/modules/theme';
+import {useRouteStore} from '@/store/modules/route';
+import HorizontalMixMenuReverse from '@/layouts/modules/global-menu/horizontal-mix-menu-reverse.vue';
 import HorizontalMenu from '../global-menu/base-menu.vue';
 import GlobalLogo from '../global-logo/index.vue';
 import GlobalBreadcrumb from '../global-breadcrumb/index.vue';
-import GlobalSearch from '../global-search/index.vue';
-import { useMixMenuContext } from '../../context';
+import {useMixMenuContext} from '../../context';
 import ThemeButton from './components/theme-button.vue';
 import UserAvatar from './components/user-avatar.vue';
 
@@ -23,6 +23,7 @@ interface Props {
   showMenuToggler?: App.Global.HeaderProps['showMenuToggler'];
   /** Whether to show the menu */
   showMenu?: App.Global.HeaderProps['showMenu'];
+  reverse?: App.Global.HeaderProps['reverse'];
 }
 
 defineProps<Props>();
@@ -38,8 +39,13 @@ const headerMenus = computed(() => {
     return routeStore.menus;
   }
 
+  // 关键代码
   if (themeStore.layout.mode === 'horizontal-mix') {
     return menus.value;
+  }
+
+  if (themeStore.layout.mode === 'horizontal-mix-reverse') {
+    return routeStore.menus;
   }
 
   return [];
@@ -49,13 +55,15 @@ const headerMenus = computed(() => {
 <template>
   <DarkModeContainer class="h-full flex-y-center shadow-header">
     <GlobalLogo v-if="showLogo" class="h-full" :style="{ width: themeStore.sider.width + 'px' }" />
-    <HorizontalMenu v-if="showMenu" mode="horizontal" :menus="headerMenus" class="px-12px" />
+    <MenuToggler v-if="reverse" :collapsed="appStore.siderCollapse" @click="appStore.toggleSiderCollapse"/>
+    <HorizontalMixMenuReverse v-if="reverse"/>
+    <HorizontalMenu v-else-if="showMenu" :menus="headerMenus" class="px-12px" mode="horizontal"/>
     <div v-else class="h-full flex-y-center flex-1-hidden">
       <MenuToggler v-if="showMenuToggler" :collapsed="appStore.siderCollapse" @click="appStore.toggleSiderCollapse" />
       <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
     </div>
     <div class="h-full flex-y-center justify-end">
-      <GlobalSearch />
+      <!--      <GlobalSearch />-->
       <FullScreen v-if="!appStore.isMobile" :full="isFullscreen" @click="toggle" />
       <LangSwitch :lang="appStore.locale" :lang-options="appStore.localeOptions" @change-lang="appStore.changeLocale" />
       <ThemeSchemaSwitch

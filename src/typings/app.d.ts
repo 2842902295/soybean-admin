@@ -141,6 +141,7 @@ declare namespace App {
       showMenuToggler?: boolean;
       /** Whether to show the menu */
       showMenu?: boolean;
+      reverse?: boolean;
     }
 
     /** The global menu */

@@ -1,14 +1,13 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
 import {createReusableTemplate} from '@vueuse/core';
-import {SimpleScrollbar} from '@sa/materials';
 import {transformColorWithOpacity} from '@sa/utils';
 import {useAppStore} from '@/store/modules/app';
 import {useRouteStore} from '@/store/modules/route';
 import {useThemeStore} from '@/store/modules/theme';
 
 defineOptions({
-  name: 'FirstLevelMenu'
+  name: 'FirstLevelMenuReverse'
 });
 
 interface Props {
@@ -38,10 +37,11 @@ interface MixMenuItemProps {
   /** Mini size */
   isMini: boolean;
 }
+
 const [DefineMixMenuItem, MixMenuItem] = createReusableTemplate<MixMenuItemProps>();
 
 const selectedBgColor = computed(() => {
-  const { darkMode, themeColor } = themeStore;
+  const {darkMode, themeColor} = themeStore;
 
   const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
   const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');
@@ -56,20 +56,18 @@ function handleClickMixMenu(menu: App.Global.Menu) {
 
 <template>
   <!-- 定义组件：MixMenuItem -->
-  <DefineMixMenuItem v-slot="{ label, icon, active, isMini }">
+  <DefineMixMenuItem v-slot="{ label, active }">
     <div
-      class="mx-4px mb-6px flex-col-center cursor-pointer rounded-8px bg-transparent px-4px py-8px transition-300 hover:bg-[rgb(0,0,0,0.08)]"
       :class="{
         'text-primary selected-mix-menu': active,
         'text-white:65 hover:text-white': inverted,
         '!text-white !bg-primary': active && inverted
       }"
+      class="inline-block h-full w-100px flex-col-center cursor-pointer bg-transparent transition-300 hover:bg-[rgb(0,0,0,0.08)]"
+      style="padding: 18px 0"
     >
-      <component :is="icon" :class="[isMini ? 'text-icon-small' : 'text-icon-large']" />
-      <p
-        class="w-full ellipsis-text text-center text-12px transition-height-300"
-        :class="[isMini ? 'h-0 pt-0' : 'h-24px pt-4px']"
-      >
+      <!--      <component :is="icon" :class="[isMini ? 'text-icon-small' : 'text-icon-large']" />-->
+      <p class="w-full ellipsis-text text-center text-15px transition-height-300">
         {{ label }}
       </p>
     </div>
@@ -78,23 +76,17 @@ function handleClickMixMenu(menu: App.Global.Menu) {
 
   <div class="h-full flex-col-stretch flex-1-hidden">
     <slot></slot>
-    <SimpleScrollbar>
+    <div>
       <MixMenuItem
         v-for="menu in routeStore.menus"
         :key="menu.key"
-        :label="menu.label"
-        :icon="menu.icon"
         :active="menu.key === activeMenuKey"
+        :icon="menu.icon"
         :is-mini="appStore.siderCollapse"
+        :label="menu.label"
         @click="handleClickMixMenu(menu)"
       />
-    </SimpleScrollbar>
-    <MenuToggler
-      arrow-icon
-      :collapsed="appStore.siderCollapse"
-      :class="{ 'text-white:88 !hover:text-white': inverted }"
-      @click="appStore.toggleSiderCollapse"
-    />
+    </div>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { PopoverPlacement } from 'naive-ui';
-import { themeLayoutModeRecord } from '@/constants/app';
-import { $t } from '@/locales';
+import type {PopoverPlacement} from 'naive-ui';
+import {themeLayoutModeRecord} from '@/constants/app';
+import {$t} from '@/locales';
 
 defineOptions({
   name: 'LayoutModeCard'
@@ -53,6 +53,12 @@ const layoutConfig: LayoutConfig = {
     mainClass: 'w-full h-3/4'
   },
   'horizontal-mix': {
+    placement: 'bottom',
+    headerClass: '',
+    menuClass: 'w-full h-1/4',
+    mainClass: 'w-2/3 h-3/4'
+  },
+  'horizontal-mix-reverse': {
     placement: 'bottom',
     headerClass: '',
     menuClass: 'w-full h-1/4',

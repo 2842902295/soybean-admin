@@ -22,7 +22,7 @@ declare namespace UnionKey {
    * - vertical-mix: two vertical mixed menus in left
    * - horizontal-mix: the vertical menu in left and horizontal menu in top
    */
-  type ThemeLayoutMode = 'vertical' | 'horizontal' | 'vertical-mix' | 'horizontal-mix';
+  type ThemeLayoutMode = 'vertical' | 'horizontal' | 'vertical-mix' | 'horizontal-mix' | 'horizontal-mix-reverse';
 
   /**
    * The scroll mode when content overflow

@@ -62,7 +62,8 @@ const local: App.I18n.Schema = {
       vertical: '左侧菜单模式',
       'vertical-mix': '左侧菜单混合模式',
       horizontal: '顶部菜单模式',
-      'horizontal-mix': '顶部菜单混合模式'
+      'horizontal-mix': '顶部菜单混合模式',
+      'horizontal-mix-reverse': '顶部菜单混合模式-反向'
     },
     themeColor: {
       title: '主题颜色',

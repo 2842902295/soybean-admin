@@ -1,4 +1,4 @@
-import { transformRecordToOption } from '@/utils/common';
+import {transformRecordToOption} from '@/utils/common';
 
 export const themeSchemaRecord: Record<UnionKey.ThemeScheme, App.I18n.I18nKey> = {
   light: 'theme.themeSchema.light',
@@ -20,7 +20,8 @@ export const themeLayoutModeRecord: Record<UnionKey.ThemeLayoutMode, App.I18n.I1
   vertical: 'theme.layoutMode.vertical',
   'vertical-mix': 'theme.layoutMode.vertical-mix',
   horizontal: 'theme.layoutMode.horizontal',
-  'horizontal-mix': 'theme.layoutMode.horizontal-mix'
+  'horizontal-mix': 'theme.layoutMode.horizontal-mix',
+  'horizontal-mix-reverse': 'theme.layoutMode.horizontal-mix-reverse'
 };
 
 export const themeLayoutModeOptions = transformRecordToOption(themeLayoutModeRecord);

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { AdminLayout, LAYOUT_SCROLL_EL_ID } from '@sa/materials';
-import type { LayoutMode } from '@sa/materials';
-import { useAppStore } from '@/store/modules/app';
-import { useThemeStore } from '@/store/modules/theme';
+import {computed} from 'vue';
+import type {LayoutMode} from '@sa/materials';
+import {AdminLayout, LAYOUT_SCROLL_EL_ID} from '@sa/materials';
+import {useAppStore} from '@/store/modules/app';
+import {useThemeStore} from '@/store/modules/theme';
 import GlobalHeader from '../modules/global-header/index.vue';
 import GlobalSider from '../modules/global-sider/index.vue';
 import GlobalTab from '../modules/global-tab/index.vue';
 import GlobalContent from '../modules/global-content/index.vue';
 import GlobalFooter from '../modules/global-footer/index.vue';
 import ThemeDrawer from '../modules/theme-drawer/index.vue';
-import { setupMixMenuContext } from '../context';
+import {setupMixMenuContext} from '../context';
 
 defineOptions({
   name: 'BaseLayout'
@@ -45,6 +45,12 @@ const headerPropsConfig: Record<UnionKey.ThemeLayoutMode, App.Global.HeaderProps
     showLogo: true,
     showMenu: true,
     showMenuToggler: false
+  },
+  'horizontal-mix-reverse': {
+    showLogo: true,
+    showMenu: true,
+    showMenuToggler: false,
+    reverse: true
   }
 };
 

@@ -62,7 +62,8 @@ const local: App.I18n.Schema = {
       vertical: 'Vertical Menu Mode',
       horizontal: 'Horizontal Menu Mode',
       'vertical-mix': 'Vertical Mix Menu Mode',
-      'horizontal-mix': 'Horizontal Mix menu Mode'
+      'horizontal-mix': 'Horizontal Mix menu Mode',
+      'horizontal-mix-reverse': 'Horizontal Mix menu Mode'
     },
     themeColor: {
       title: 'Theme Color',
