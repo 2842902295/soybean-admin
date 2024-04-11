@@ -5,7 +5,7 @@ import {getColorPalette, mixColor} from '@sa/utils';
 import {$t} from '@/locales';
 import {useThemeStore} from '@/store/modules/theme';
 import {loginModuleRecord} from '@/constants/app';
-import PwdLogin from './modules/pwd-login-backup.vue';
+import PwdLogin from './modules/pwd-login.vue';
 import CodeLogin from './modules/code-login.vue';
 import Register from './modules/register.vue';
 import ResetPwd from './modules/reset-pwd.vue';
