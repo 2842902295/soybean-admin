@@ -1,4 +1,4 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import type {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from 'axios';
 
 export type ContentType =
   | 'text/html'
@@ -18,7 +18,7 @@ export interface RequestOption<ResponseData = any> {
    */
   onRequest: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>;
   /**
-   * The hook to check backend response is success or not
+   * 检查后端响应成功与否的钩子
    *
    * @param response Axios response
    */

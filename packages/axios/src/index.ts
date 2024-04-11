@@ -1,9 +1,9 @@
-import axios, { AxiosError } from 'axios';
-import type { AxiosResponse, CancelTokenSource, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios';
+import type {AxiosResponse, CancelTokenSource, CreateAxiosDefaults, InternalAxiosRequestConfig} from 'axios';
+import axios, {AxiosError} from 'axios';
 import axiosRetry from 'axios-retry';
-import { nanoid } from '@sa/utils';
-import { createAxiosConfig, createDefaultOptions, createRetryOptions } from './options';
-import { BACKEND_ERROR_CODE, REQUEST_ID_KEY } from './constant';
+import {nanoid} from '@sa/utils';
+import {createAxiosConfig, createDefaultOptions, createRetryOptions} from './options';
+import {BACKEND_ERROR_CODE, REQUEST_ID_KEY} from './constant';
 import type {
   CustomAxiosRequestConfig,
   FlatRequestInstance,
@@ -58,7 +58,7 @@ function createCommonRequest<ResponseData = any>(
       }
 
       const backendError = new AxiosError<ResponseData>(
-        'the backend request error',
+        '后端请求错误',
         BACKEND_ERROR_CODE,
         response.config,
         response.request,

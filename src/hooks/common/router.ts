@@ -1,14 +1,14 @@
-import { useRouter } from 'vue-router';
-import type { RouteLocationRaw } from 'vue-router';
-import type { RouteKey } from '@elegant-router/types';
-import { router as globalRouter } from '@/router';
+import type {RouteLocationRaw} from 'vue-router';
+import {useRouter} from 'vue-router';
+import type {RouteKey} from '@elegant-router/types';
+import {router as globalRouter} from '@/router';
 
 /**
- * Router push
+ * 路由器推送
  *
- * Jump to the specified route, it can replace function router.push
+ * 跳转到指定路由，可替换 router.push 功能
  *
- * @param inSetup Whether is in vue script setup
+ * @param inSetup 是否在 vue 脚本设置中
  */
 export function useRouterPush(inSetup = true) {
   const router = inSetup ? useRouter() : globalRouter;

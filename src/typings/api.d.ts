@@ -54,6 +54,8 @@ declare namespace Api {
     interface LoginToken {
       token: string;
       refreshToken: string;
+
+      accessToken?: string;
     }
 
     interface UserInfo {

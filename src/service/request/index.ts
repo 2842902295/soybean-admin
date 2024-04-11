@@ -1,10 +1,10 @@
-import type { AxiosResponse } from 'axios';
-import { BACKEND_ERROR_CODE, createFlatRequest, createRequest } from '@sa/axios';
-import { useAuthStore } from '@/store/modules/auth';
-import { localStg } from '@/utils/storage';
-import { getServiceBaseURL } from '@/utils/service';
-import { $t } from '@/locales';
-import { handleRefreshToken } from './shared';
+import type {AxiosResponse} from 'axios';
+import {BACKEND_ERROR_CODE, createFlatRequest, createRequest} from '@sa/axios';
+import {useAuthStore} from '@/store/modules/auth';
+import {localStg} from '@/utils/storage';
+import {getServiceBaseURL} from '@/utils/service';
+import {$t} from '@/locales';
+import {handleRefreshToken} from './shared';
 
 const isHttpProxy = import.meta.env.DEV && import.meta.env.VITE_HTTP_PROXY === 'Y';
 const { baseURL, otherBaseURL } = getServiceBaseURL(import.meta.env, isHttpProxy);
@@ -33,9 +33,9 @@ export const request = createFlatRequest<App.Service.Response, InstanceState>(
       return config;
     },
     isBackendSuccess(response) {
-      // when the backend response code is "0000"(default), it means the request is success
-      // to change this logic by yourself, you can modify the `VITE_SERVICE_SUCCESS_CODE` in `.env` file
-      return response.data.code === import.meta.env.VITE_SERVICE_SUCCESS_CODE;
+      // 当后端响应码为“0000”（默认）时，表示请求成功
+      // 要自行更改此逻辑，您可以修改“.env”文件中的“VITE_SERVICE_SUCCESS_CODE”
+      return String(response.data.code) === import.meta.env.VITE_SERVICE_SUCCESS_CODE;
     },
     async onBackendFail(response, instance) {
       const authStore = useAuthStore();
@@ -78,8 +78,8 @@ export const request = createFlatRequest<App.Service.Response, InstanceState>(
         return null;
       }
 
-      // when the backend response code is in `expiredTokenCodes`, it means the token is expired, and refresh token
-      // the api `refreshToken` can not return error code in `expiredTokenCodes`, otherwise it will be a dead loop, should return `logoutCodes` or `modalLogoutCodes`
+      // 当后端响应代码在“expiredTokenCodes”中时，表示令牌已过期，刷新令牌
+      // api 'refreshToken' 不能在 'expiredTokenCodes' 中返回错误代码，否则它将是一个死循环，应该返回 'logoutCodes' 或 'modalLogoutCodes'
       const expiredTokenCodes = import.meta.env.VITE_SERVICE_EXPIRED_TOKEN_CODES?.split(',') || [];
       if (expiredTokenCodes.includes(response.data.code) && !request.state.isRefreshingToken) {
         request.state.isRefreshingToken = true;
@@ -143,9 +143,9 @@ export const demoRequest = createRequest<App.Service.DemoResponse>(
       return config;
     },
     isBackendSuccess(response) {
-      // when the backend response code is "200", it means the request is success
-      // you can change this logic by yourself
-      return response.data.status === '200';
+      // 当后端响应代码为“200”时，表示请求成功
+      // 你可以自己改变这个逻辑
+      return response.data.status === '0';
     },
     async onBackendFail(_response) {
       // when the backend response code is not "200", it means the request is fail

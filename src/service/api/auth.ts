@@ -1,17 +1,17 @@
-import { request } from '../request';
+import {request} from '../request';
 
 /**
  * Login
  *
- * @param userName User name
+ * @param username User name
  * @param password Password
  */
-export function fetchLogin(userName: string, password: string) {
+export function fetchLogin(username: string, password: string) {
   return request<Api.Auth.LoginToken>({
-    url: '/auth/login',
+    url: '/system/auth/login',
     method: 'post',
     data: {
-      userName,
+      username,
       password
     }
   });
@@ -19,7 +19,7 @@ export function fetchLogin(userName: string, password: string) {
 
 /** Get user info */
 export function fetchGetUserInfo() {
-  return request<Api.Auth.UserInfo>({ url: '/auth/getUserInfo' });
+  return request<Api.Auth.UserInfo>({url: '/system/auth/get-permission-info'});
 }
 
 /**
@@ -29,7 +29,7 @@ export function fetchGetUserInfo() {
  */
 export function fetchRefreshToken(refreshToken: string) {
   return request<Api.Auth.LoginToken>({
-    url: '/auth/refreshToken',
+    url: '/system/auth/refreshToken',
     method: 'post',
     data: {
       refreshToken
@@ -38,7 +38,7 @@ export function fetchRefreshToken(refreshToken: string) {
 }
 
 /**
- * return custom backend error
+ * 返回自定义后端错误
  *
  * @param code error code
  * @param msg error message

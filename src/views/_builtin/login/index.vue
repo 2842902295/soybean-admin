@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { Component } from 'vue';
-import { getColorPalette, mixColor } from '@sa/utils';
-import { $t } from '@/locales';
-import { useAppStore } from '@/store/modules/app';
-import { useThemeStore } from '@/store/modules/theme';
-import { loginModuleRecord } from '@/constants/app';
-import PwdLogin from './modules/pwd-login.vue';
+import type {Component} from 'vue';
+import {computed} from 'vue';
+import {getColorPalette, mixColor} from '@sa/utils';
+import {$t} from '@/locales';
+import {useThemeStore} from '@/store/modules/theme';
+import {loginModuleRecord} from '@/constants/app';
+import PwdLogin from './modules/pwd-login-backup.vue';
 import CodeLogin from './modules/code-login.vue';
 import Register from './modules/register.vue';
 import ResetPwd from './modules/reset-pwd.vue';
@@ -19,7 +18,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const appStore = useAppStore();
+// const appStore = useAppStore();
 const themeStore = useThemeStore();
 
 interface LoginModule {
@@ -56,20 +55,13 @@ const bgColor = computed(() => {
     <NCard :bordered="false" class="relative z-4 w-auto rd-12px">
       <div class="w-400px lt-sm:w-300px">
         <header class="flex-y-center justify-between">
-          <SystemLogo class="text-64px text-primary lt-sm:text-48px" />
-          <h3 class="text-28px text-primary font-500 lt-sm:text-22px">{{ $t('system.title') }}</h3>
+          <h3 class="text-28px text-primary font-500 lt-sm:text-22px">工程标准数字化应用系统</h3>
           <div class="i-flex-col">
             <ThemeSchemaSwitch
               :theme-schema="themeStore.themeScheme"
               :show-tooltip="false"
               class="text-20px lt-sm:text-18px"
               @switch="themeStore.toggleThemeScheme"
-            />
-            <LangSwitch
-              :lang="appStore.locale"
-              :lang-options="appStore.localeOptions"
-              :show-tooltip="false"
-              @change-lang="appStore.changeLocale"
             />
           </div>
         </header>

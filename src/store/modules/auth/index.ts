@@ -1,13 +1,13 @@
-import { computed, reactive, ref } from 'vue';
-import { defineStore } from 'pinia';
-import { useLoading } from '@sa/hooks';
-import { SetupStoreId } from '@/enum';
-import { useRouterPush } from '@/hooks/common/router';
-import { fetchGetUserInfo, fetchLogin } from '@/service/api';
-import { localStg } from '@/utils/storage';
-import { $t } from '@/locales';
-import { useRouteStore } from '../route';
-import { clearAuthStorage, getToken, getUserInfo } from './shared';
+import {computed, reactive, ref} from 'vue';
+import {defineStore} from 'pinia';
+import {useLoading} from '@sa/hooks';
+import {SetupStoreId} from '@/enum';
+import {useRouterPush} from '@/hooks/common/router';
+import {fetchGetUserInfo, fetchLogin} from '@/service/api';
+import {localStg} from '@/utils/storage';
+import {$t} from '@/locales';
+import {useRouteStore} from '../route';
+import {clearAuthStorage, getToken, getUserInfo} from './shared';
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const routeStore = useRouteStore();
@@ -55,6 +55,9 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     const { data: loginToken, error } = await fetchLogin(userName, password);
 
+    loginToken && (loginToken.token = loginToken.accessToken || '');
+    delete loginToken?.accessToken;
+
     if (!error) {
       const pass = await loginByToken(loginToken);
 
@@ -81,17 +84,17 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function loginByToken(loginToken: Api.Auth.LoginToken) {
-    // 1. stored in the localStorage, the later requests need it in headers
+    // 1. 存储在 localStorage 中，后面的请求需要它在标头中
     localStg.set('token', loginToken.token);
     localStg.set('refreshToken', loginToken.refreshToken);
 
     const { data: info, error } = await fetchGetUserInfo();
 
     if (!error) {
-      // 2. store user info
+      // 2. 存储用户信息
       localStg.set('userInfo', info);
 
-      // 3. update store
+      // 3. 更新存储
       token.value = loginToken.token;
       Object.assign(userInfo, info);
 
